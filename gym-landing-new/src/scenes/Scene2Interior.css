@@ -1,0 +1,45 @@
+.scene2-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, #000, #111);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  position: relative;
+  overflow: visible;
+}
+
+.greek-god-left {
+  position: absolute;
+  left: 40px;
+  bottom: 0;
+  width: 30vw;
+  height: auto;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+  z-index: 2;
+}
+
+.features-content {
+  max-width: 700px;
+  z-index: 3;
+  font-family: 'Poppins', sans-serif;
+}
+
+.features-content h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.plans, .features {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 40px;
+}
+
+.plans li, .features li {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}

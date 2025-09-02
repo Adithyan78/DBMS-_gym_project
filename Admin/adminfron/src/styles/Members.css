@@ -1,0 +1,108 @@
+.members-page {
+  padding: 20px;
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.members-page h2 {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed; /* Ensures consistent column widths */
+}
+
+.members-table th, .members-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+
+.members-table th {
+  background-color: #0a0a0a;
+  font-weight: bold;
+}
+
+.members-table tr {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+
+.members-table tr:hover {
+  background-color: #252525;
+}
+
+.members-table input, .members-table select {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #0a0a0a;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.members-table input:focus, .members-table select:focus {
+  outline: none;
+  border-color: #ff3838;
+}
+
+button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.2s;
+}
+
+.edit-btn, .update-btn {
+  background: #ff3838;
+}
+
+.edit-btn:hover, .update-btn:hover {
+  background: #e52e2e;
+}
+
+.delete-btn {
+  background: #333;
+}
+
+.delete-btn:hover {
+  background: #555;
+}
+
+.cancel-btn {
+  background: #555;
+}
+
+.cancel-btn:hover {
+  background: #777;
+}
+
+/* Ensure the table takes full width */
+.members-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Make sure all cells have consistent styling */
+.members-table td:first-child {
+  border-left: 1px solid transparent; /* Helps with visual alignment */
+}
+
+.members-table td:last-child {
+  border-right: 1px solid transparent; /* Helps with visual alignment */
+}

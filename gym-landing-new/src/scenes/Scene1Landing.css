@@ -1,0 +1,566 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: auto;
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.full-page-container {
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+}
+
+
+.page-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ------------------- SCENE 1 ------------------- */
+.scene1-container {
+  min-height: 100vh;
+  background: black;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Doors */
+.door {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  background: repeating-linear-gradient(to right, #1a1a1a, #1a1a1a 10px, #111 10px, #111 20px);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.05);
+  border: 1px solid #222;
+}
+.door-left { left: 0; }
+.door-right { left: 50%; }
+
+.handle {
+  width: 10px;
+  height: 60px;
+  background: linear-gradient(to bottom, #555, #333);
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.door-left .handle { right: 20px; }
+.door-right .handle { left: 20px; }
+
+
+.door-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  font-size: 3.5rem;
+  color: #ff0000;
+  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 8px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+/* --- Angled Text on Doors --- */
+.door-text {
+  position: absolute;
+  top: 53%;
+  transform: translateY(-50%);
+  font-size: 5rem;
+  font-weight: 900;
+  font-family: 'Oswald', sans-serif;
+  color: #ff0000;
+  letter-spacing: 12px;
+  opacity: 0.3;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 2px 2px 8px rgba(255, 0, 0, 0.5);
+}
+
+/* Position ATH on the inner-right edge of the left door */
+.door-left-text {
+  right: 0%; /* Push toward right edge */
+  transform: translateY(-70%) rotate(0deg);
+}
+
+/* Position ENIX on the inner-left edge of the right door */
+.door-right-text {
+  left: 0%; /* Push toward left edge */
+  transform: translateY(-70%) rotate(0deg);
+}
+
+
+
+/* Optional: Slight difference between left/right labels */
+.door-left .door-label {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.door-right .door-label {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+
+/* Spotlight & lighting */
+.spotlight {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.1), rgba(0,0,0,1) 70%);
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.god-light-beam {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  width: 36vw;
+  height: 70vh;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08), transparent 70%);
+  z-index: 1;
+  filter: blur(10px);
+}
+
+.god-ground-shadow {
+  position: absolute;
+  bottom: 0;
+  right: 70px;
+  width: 120px;
+  height: 30px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent);
+  z-index: 1;
+  filter: blur(4px);
+}
+
+/* Greek God Image */
+.greek-god {
+  position: absolute;
+  right: 40px; /* Keep this fixed */
+  bottom: 0;
+  width: 33.33vw;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.15));
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.greek-god:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.greek-god.glow {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)); }
+  50% { filter: drop-shadow(0 0 30px rgba(255, 255, 255, 1)); }
+  100% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)); }
+}
+
+/* Particle Effects */
+.particles {
+  position: absolute;
+  bottom: 0;
+  right: 100px;
+  width: 200px;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  animation: floatUp 6s infinite ease-in;
+  opacity: 0.7;
+}
+.particle:nth-child(odd) {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 44, 44, 0.3);
+}
+
+@keyframes floatup {
+  0% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+}
+
+/* Welcome Text */
+.welcome-block {
+  position: absolute;
+  top: 31%;
+  left: 400px;
+  color: white;
+  z-index: 3;
+  max-width: 40%;
+  text-align: left;
+}
+
+.welcome-heading {
+  font-family: Poppins, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #f4f4f4;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.quote-block {
+  margin-top: 30px;
+  max-width: 600px;
+  color: white;
+  text-align: left;
+}
+
+.quote-line {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.quote-word {
+  display: inline-block;
+  white-space: pre;
+}
+
+/* CTA Buttons */
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.join-btn,
+.explore-btn {
+  font-family: 'Poppins', sans-serif;
+  padding: 12px 28px;
+  font-size: 1rem;
+  margin-top: 45px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.join-btn {
+  background: linear-gradient(45deg, #ff3d3d, #b30000);
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 80, 80, 0.5);
+}
+.join-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 80, 80, 0.7);
+}
+
+.explore-btn {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.explore-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.05);
+}
+
+/* Barbell Shadow */
+.barbell-shadow {
+  position: absolute;
+  bottom: 75px;
+  width: 180px;
+  height: 25px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.4), transparent);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* ------------------- SCENE 2 ------------------- */
+.scene2-container {
+  min-height: 100vh;                                              
+   z-index: 10; 
+  background: #111;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Add this */
+  padding: 60px;
+  gap: 60px;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.scene2-character-left {
+  width: 30vw;
+  height: auto;
+  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.15));
+  animation: floatUp 3s ease-in-out infinite alternate;
+}
+
+.scene2-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.scene2-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 24px;
+  color: #f44336;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.features-list li {
+  margin-bottom: 12px;
+}
+.scene2-character-left {
+  width: 30vw;
+  height: auto;
+  animation: none; /* Important: stops up-down floating */
+}
+.training-cards {
+  display: flex;
+  flex-direction: row;      /* Ensures horizontal layout */
+  gap: 40px;                /* Space between cards */
+  justify-content: center; /* Centers them in the parent */
+  margin-top: 30px;
+  flex-wrap: nowrap;        /* Prevents wrapping to next line */
+          /* Allows horizontal scrolling on small screens */
+  padding-bottom: 20px;
+}
+
+
+
+.training-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+}
+
+.training-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  color: #ff3d3d;
+  margin-bottom: 10px;
+}
+
+.training-card p {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #ddd;
+}
+
+.training-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.training-card ul li {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 6px;
+}
+
+.training-card:hover {
+  transform: translateY(8px);
+  box-shadow: 0 0 25px rgba(255, 61, 61, 0.2);
+}
+.plan-name {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ff3d3d;
+  margin-bottom: 10px;
+}
+
+.plan-price {
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.plan-price span {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.plan-features li {
+  font-size: 0.95rem;
+   min-height: 32px;
+  margin-bottom: 10px;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plan-features li i.fa-check-circle {
+  color: #4caf50; /* green check */
+}
+
+.plan-features li i.fa-times-circle {
+  color: #f44336; /* red cross */
+}
+.training-card .join-btn {
+  margin-top: auto;  /* Pushes button to bottom of card */
+  align-self: center;
+}
+
+.scene2-spartan {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 400px;       /* ⬅️ Increase from 280px to 500px or more */
+  max-width: 50vw;    /* ⬅️ Allow more of the viewport width (try 50-60vw) */
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.scene2-spartan.fixed {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  z-index: 10;
+}
+
+.scene2-spartan.static {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.scene2-spartan.glow {
+  filter: drop-shadow(0 0 12px #fdfdfd) brightness(1.2);
+  transition: filter 0.3s ease-in-out;
+}
+
+.scene3-about-container {
+  height: 100vh;
+  width: 100%;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: white;
+  border-top: 2px solid #ff0000;
+}
+
+.about-inner {
+  max-width: 900px;
+  margin: auto;
+}
+
+.about-heading {
+  font-size: 2.8rem;
+  color: #ff0000;
+  margin-bottom: 30px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.about-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+}
+.owner-contact-info {
+  margin-top: 40px;
+}
+
+.owner-contact-info h3 {
+  font-size: 1.6rem;
+  color: #ff3333;
+  margin-bottom: 20px;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-links li {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.social-links a {
+  color: #e0e0e0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #ff0000;
+}
+
+.social-links i {
+  margin-right: 10px;
+}
+.scene3-about-container::after {
+  content: "";
+  background: url('../assets/images/bruce.jpeg') right bottom no-repeat;
+  opacity: 0.3;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+
+
+
+
+
+
